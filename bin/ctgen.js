@@ -21,6 +21,8 @@ program.command('install')
   .option('--aws-id [n]', 'Amazon ID', null)
   .option('--aws-secret [n]', 'Amazon Secret', null)
   .option('--aws-region [n]', 'Amazon Region',null )
+  .option('--aws-bucket [n]', 'remote bucket', null)
+  .option('--aws-dir [n]', 'amazon bucket dir', null)
   .option('--only-process','only run scripts for process data in db')
   .option('--run','run in this process')
   .option('--spawn', 'run in separate processes')
@@ -32,15 +34,17 @@ program.command('install')
       return;
     };
 
-    if(options.awsId || options.awsSecret || options.awsRegion) {
-      if(options.awsId === null || options.awsSecret === null || options.awsRegion === null) {
+    if(options.awsId || options.awsSecret || options.awsRegion || options.awsBucket || options.awsDir) {
+      if(options.awsId === null || options.awsSecret === null || options.awsRegion === null || options.awsDir === null || options.awsBucket === null) {
         options.help && options.help() || program.help();
         return
       } else {
         options.aws = {
           id: options.awsId,
           secret: options.awsSecret,
-          region: options.awsRegion
+          region: options.awsRegion,
+          bucket: options.awsBucket,
+          dir: options.awsDir,
         }
       console.log("OPTIONS", options.aws)
         
