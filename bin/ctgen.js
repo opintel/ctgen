@@ -18,6 +18,9 @@ program.command('install')
   .option('--xlsx [path]','xls files to process')
   .option('--csv [path]','csv files to process')
   .option('--no-mongo','noMongo')
+  .option('--aws-id [n]', 'Amazon ID', null)
+  .option('--aws-secret [n]', 'Amazon Secret', null)
+  .option('--aws-region [n]', 'Amazon Region',null )
   .option('--only-process','only run scripts for process data in db')
   .option('--run','run in this process')
   .option('--spawn', 'run in separate processes')
@@ -28,6 +31,21 @@ program.command('install')
       options.help && options.help() || program.help();
       return;
     };
+
+    if(options.awsId || options.awsSecret || options.awsRegion) {
+      if(options.awsId === null || options.awsSecret === null || options.awsRegion === null) {
+        options.help && options.help() || program.help();
+        return
+      } else {
+        options.aws = {
+          id: options.awsId,
+          secret: options.awsSecret,
+          region: options.awsRegion
+        }
+      console.log("OPTIONS", options.aws)
+        
+      }
+    }
     ctgen.verbose = options.verbose;
 
     if(!options.noMongo){
