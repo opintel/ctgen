@@ -8,6 +8,13 @@
 node bin/ctgen.js install --no-mongo
 ```
 
+Para subir a S3:
+
+```
+node bin/ctgen.js install --no-mongo --aws-id YYYYYYYYYYYY --aws-secret XXXXXXXXXXXXXXXXX --aws-region us-west-2
+
+```
+
 ## Procesos
 
 1. Ejecuta `runAll` dentro de *main.js*
